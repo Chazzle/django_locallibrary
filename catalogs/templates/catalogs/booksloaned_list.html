@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>All loaned books</h1>
+
+    {% if bookinstance_list %}
+        
+    <ul>
+        {% for ins in bookinstance_list %}
+        
+            <li><a href="{% url 'book-detail' ins.book.pk %}">{{ins.book.title}}</a> has been taken out by {{ins.borrower}}</li>
+            <li>Due Back: {{ins.due_back}} <a href="{% url 'renew-book-librarian' ins.id %}">Renew?</a></li>
+        {% endfor %}
+    </ul>
+    
+    {% else %}
+        <p>No books are currently out</p>
+    {% endif %}
+
+{% endblock %}
